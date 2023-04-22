@@ -52,22 +52,35 @@ export const Chart = ({ expenses }: ChartProps) => {
   }
 
   return (
-    <PieChart width={800} height={400}>
-      <Pie
-        data={data}
-        dataKey="value"
-        nameKey="name"
-        cx="50%"
-        cy="50%"
-        fill="#8884d8"
-        label={({ name, value }) => `${name}: ${value}`} // Custom label
-      >
-        {data.map((entry, index) => (
-          <Cell key={`cell-${index}`} fill={randomColor()} /> // Random color
-        ))}
-        <Label position="center" fill="#000" fontSize={18} fontWeight="bold" />
-      </Pie>
-      <Legend />
-    </PieChart>
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <PieChart width={800} height={400}>
+        <Pie
+          data={data}
+          dataKey="value"
+          nameKey="name"
+          cx="50%"
+          cy="50%"
+          fill="#8884d8"
+          label={({ name, value }) => `${name}: ${value}`} // Custom label
+        >
+          {data.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={randomColor()} /> // Random color
+          ))}
+          <Label
+            position="center"
+            fill="#000"
+            fontSize={18}
+            fontWeight="bold"
+          />
+        </Pie>
+        <Legend />
+      </PieChart>
+    </div>
   );
 };
