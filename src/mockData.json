@@ -1,0 +1,71 @@
+[{
+    "description": "Expense 0",
+    "amount": 248,
+    "category": "transportation",
+    "timestamp": 1682081527901,
+    "date": "2023-04-21"
+  },
+  {
+    "description": "Expense 1",
+    "amount": 886,
+    "category": "transportation",
+    "timestamp": 1682156976769,
+    "date": "2023-04-22"
+  },
+  {
+    "description": "Expense 2",
+    "amount": 786,
+    "category": "housing",
+    "timestamp": 1682114189708,
+    "date": "2023-04-22"
+  },
+  {
+    "description": "Expense 3",
+    "amount": 184,
+    "category": "housing",
+    "timestamp": 1682153232346,
+    "date": "2023-04-22"
+  },
+  {
+    "description": "Expense 4",
+    "amount": 931,
+    "category": "transportation",
+    "timestamp": 1682084682969,
+    "date": "2023-04-21"
+  },
+  {
+    "description": "Expense 5",
+    "amount": 181,
+    "category": "transportation",
+    "timestamp": 1682121682694,
+    "date": "2023-04-22"
+  },
+  {
+    "description": "Expense 6",
+    "amount": 542,
+    "category": "transportation",
+    "timestamp": 1681997064884,
+    "date": "2023-04-20"
+  },
+  {
+    "description": "Expense 7",
+    "amount": 712,
+    "category": "food",
+    "timestamp": 1682148399552,
+    "date": "2023-04-22"
+  },
+  {
+    "description": "Expense 8",
+    "amount": 660,
+    "category": "housing",
+    "timestamp": 1681931557016,
+    "date": "2023-04-19"
+  },
+  {
+    "description": "Expense 9",
+    "amount": 210,
+    "category": "housing",
+    "timestamp": 1681914375091,
+    "date": "2023-04-19"
+  }
+]
