@@ -1,4 +1,4 @@
-https://benevolent-chimera-c5ddba.netlify.app/
+deploy: https://benevolent-chimera-c5ddba.netlify.app/
 
 # Getting Started with Create React App
 
