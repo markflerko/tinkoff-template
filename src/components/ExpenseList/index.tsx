@@ -1,5 +1,6 @@
-import { Select, Table, Text, TextInput, Button } from '@mantine/core';
+import { Button, Select, Table, Text, TextInput } from '@mantine/core';
 import { useState } from 'react';
+import { Legend, Pie, PieChart } from 'recharts';
 import { ExpensesType } from '../../types/ExpensesTypes';
 
 type ExpenseListProps = {
@@ -15,7 +16,7 @@ function ExpenseList({ expenses }: ExpenseListProps) {
   const filteredExpenses = expenses.filter((expense) => {
     const isCategoryMatch =
       !categoryFilter || expense.category === categoryFilter;
-      const isDateMatch =
+    const isDateMatch =
       !startDate ||
       !endDate ||
       (expense.timestamp >= new Date(startDate).getTime() &&
@@ -33,6 +34,21 @@ function ExpenseList({ expenses }: ExpenseListProps) {
     { label: 'Housing', value: 'housing' },
     { label: 'Transportation', value: 'transportation' },
   ];
+
+  const expensesByCategory = expenses.reduce((acc, { category, amount }) => {
+    if (!acc[category]) {
+      acc[category] = 0;
+    }
+    acc[category] += amount;
+    return acc;
+  }, {} as Record<string, number>);
+
+  const data = Object.entries(expensesByCategory).map(([category, amount]) => {
+    return {
+      name: category,
+      value: amount,
+    };
+  });
 
   return (
     <div>
@@ -104,6 +120,18 @@ function ExpenseList({ expenses }: ExpenseListProps) {
           </tr>
         </tbody>
       </Table>
+
+      <PieChart width={400} height={400}>
+        <Pie
+          data={data}
+          dataKey="value"
+          nameKey="name"
+          cx="50%"
+          cy="50%"
+          fill="#8884d8"
+        />
+        <Legend />
+      </PieChart>
     </div>
   );
 }

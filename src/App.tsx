@@ -19,6 +19,7 @@ function App() {
       <ExpenseForm setExpenses={setExpenses} />
       <br />
       <ExpenseList expenses={expenses} />
+      <br />
     </div>
   );
 }
