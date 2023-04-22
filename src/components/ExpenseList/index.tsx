@@ -1,4 +1,4 @@
-import { Select, Table, Text } from '@mantine/core';
+import { Select, Table, Text, TextInput, Button } from '@mantine/core';
 import { useState } from 'react';
 import { ExpensesType } from '../../types/ExpensesTypes';
 
@@ -8,11 +8,20 @@ type ExpenseListProps = {
 
 function ExpenseList({ expenses }: ExpenseListProps) {
   const [categoryFilter, setCategoryFilter] = useState<string>('');
+  const [startDate, setStartDate] = useState<string>('');
+  const [endDate, setEndDate] = useState<string>('');
 
-  // Filter expenses by category
-  const filteredExpenses = categoryFilter
-    ? expenses.filter((expense) => expense.category === categoryFilter)
-    : expenses;
+  // Filter expenses by category and date range
+  const filteredExpenses = expenses.filter((expense) => {
+    const isCategoryMatch =
+      !categoryFilter || expense.category === categoryFilter;
+      const isDateMatch =
+      !startDate ||
+      !endDate ||
+      (expense.timestamp >= new Date(startDate).getTime() &&
+        expense.timestamp < new Date(endDate).getTime() + 86400000);
+    return isCategoryMatch && isDateMatch;
+  });
 
   // Calculate total amount
   const total = filteredExpenses.reduce((acc, curr) => +acc + +curr.amount, 0);
@@ -41,6 +50,27 @@ function ExpenseList({ expenses }: ExpenseListProps) {
           onChange={(value) => setCategoryFilter(value || '')}
           data={categories}
         />
+        <TextInput
+          placeholder="Start date (YYYY-MM-DD)"
+          value={startDate}
+          onChange={(event) => setStartDate(event.currentTarget.value)}
+          style={{ marginLeft: '1rem', marginRight: '1rem' }}
+        />
+        <TextInput
+          placeholder="End date (YYYY-MM-DD)"
+          value={endDate}
+          onChange={(event) => setEndDate(event.currentTarget.value)}
+          style={{ marginLeft: '1rem', marginRight: '1rem' }}
+        />
+        <Button
+          onClick={() => {
+            setCategoryFilter('');
+            setStartDate('');
+            setEndDate('');
+          }}
+        >
+          Clear filters
+        </Button>
       </div>
       <Table striped>
         <thead>
@@ -48,7 +78,7 @@ function ExpenseList({ expenses }: ExpenseListProps) {
             <th>Description</th>
             <th>Amount</th>
             <th>Category</th>
-            <th>Date</th>
+            <th>Date (YYYY-MM-DD)</th>
           </tr>
         </thead>
         <tbody>
@@ -57,7 +87,7 @@ function ExpenseList({ expenses }: ExpenseListProps) {
               <td>{expense.description}</td>
               <td>${expense.amount}</td>
               <td>{expense.category}</td>
-              <td>{new Date(expense.timestamp).toLocaleDateString()}</td>
+              <td>{new Date(expense.timestamp).toISOString().slice(0, 10)}</td>
             </tr>
           ))}
           <tr>
