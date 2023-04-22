@@ -48,14 +48,16 @@ function ExpenseList({ expenses }: ExpenseListProps) {
             <th>Description</th>
             <th>Amount</th>
             <th>Category</th>
+            <th>Date</th>
           </tr>
         </thead>
         <tbody>
           {filteredExpenses.map((expense) => (
             <tr key={expense.description}>
               <td>{expense.description}</td>
-              <td>{expense.amount}</td>
+              <td>${expense.amount}</td>
               <td>{expense.category}</td>
+              <td>{new Date(expense.timestamp).toLocaleDateString()}</td>
             </tr>
           ))}
           <tr>
@@ -64,7 +66,7 @@ function ExpenseList({ expenses }: ExpenseListProps) {
                 Total:
               </Text>
             </td>
-            <td colSpan={2}>
+            <td colSpan={3}>
               <Text size="lg" weight={500}>
                 ${total}
               </Text>

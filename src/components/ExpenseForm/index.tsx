@@ -11,6 +11,7 @@ function ExpenseForm({ setExpenses }: ExpenseFormProps) {
     description: '',
     amount: 0,
     category: '',
+    timestamp: 0,
   });
 
   const categories = ['food', 'housing', 'transportation'];
@@ -19,11 +20,12 @@ function ExpenseForm({ setExpenses }: ExpenseFormProps) {
     event.preventDefault();
     // save expense data locally
     const expenses = JSON.parse(localStorage.getItem('expenses') || '[]');
+    expense.timestamp = Date.now();
     const result = [...expenses, expense];
     localStorage.setItem('expenses', JSON.stringify(result));
     setExpenses(result);
     console.log('Submitting expense:', expense);
-    setExpense({ description: '', amount: 0, category: '' });
+    setExpense({ description: '', amount: 0, category: '', timestamp: 0 });
   };
 
   return (
@@ -51,10 +53,14 @@ function ExpenseForm({ setExpenses }: ExpenseFormProps) {
         label="Category"
         placeholder="Select category"
         value={expense.category}
-        onChange={(value: string) => setExpense({ ...expense, category: value })}
+        onChange={(value: string) =>
+          setExpense({ ...expense, category: value })
+        }
         style={{ width: '100%', marginRight: '10px' }}
       />
-      <Button type="submit" style={{marginTop: '24px'}}>Add expense</Button>
+      <Button type="submit" style={{ marginTop: '24px' }}>
+        Add expense
+      </Button>
     </form>
   );
 }
