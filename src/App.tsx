@@ -3,6 +3,7 @@ import './App.css';
 import ExpenseForm from './components/ExpenseForm';
 import ExpenseList from './components/ExpenseList';
 import { ExpensesType } from './types/ExpensesTypes';
+import { Chart } from './components/Chart';
 
 function App() {
   const [expenses, setExpenses] = useState<ExpensesType[]>([]);
@@ -20,6 +21,7 @@ function App() {
       <br />
       <ExpenseList expenses={expenses} />
       <br />
+      <Chart expenses={expenses}/>
     </div>
   );
 }
