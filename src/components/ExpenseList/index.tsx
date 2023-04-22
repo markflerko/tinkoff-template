@@ -34,6 +34,9 @@ function ExpenseList({ expenses }: ExpenseListProps) {
     { label: 'Transportation', value: 'transportation' },
   ];
 
+  // Sort expenses by timestamp
+  const sortedExpenses = filteredExpenses.sort((a, b) => a.timestamp - b.timestamp);
+
   return (
     <div>
       <div
@@ -82,7 +85,7 @@ function ExpenseList({ expenses }: ExpenseListProps) {
           </tr>
         </thead>
         <tbody>
-          {filteredExpenses.map((expense) => (
+          {sortedExpenses.map((expense) => (
             <tr key={expense.description}>
               <td>{expense.description}</td>
               <td>${expense.amount}</td>
