@@ -1,4 +1,4 @@
-import { Button, TextInput } from '@mantine/core';
+import { Button, Select, TextInput } from '@mantine/core';
 import { useState } from 'react';
 import { ExpensesType } from '../../types/ExpensesTypes';
 
@@ -9,9 +9,11 @@ type ExpenseFormProps = {
 function ExpenseForm({ setExpenses }: ExpenseFormProps) {
   const [expense, setExpense] = useState({
     description: '',
-    amount: '',
+    amount: 0,
     category: '',
   });
+
+  const categories = ['food', 'housing', 'transportation'];
 
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
@@ -21,7 +23,7 @@ function ExpenseForm({ setExpenses }: ExpenseFormProps) {
     localStorage.setItem('expenses', JSON.stringify(result));
     setExpenses(result);
     console.log('Submitting expense:', expense);
-    setExpense({ description: '', amount: '', category: '' });
+    setExpense({ description: '', amount: 0, category: '' });
   };
 
   return (
@@ -40,18 +42,17 @@ function ExpenseForm({ setExpenses }: ExpenseFormProps) {
         placeholder="Enter amount"
         value={expense.amount}
         onChange={(event) =>
-          setExpense({ ...expense, amount: event.target.value })
+          setExpense({ ...expense, amount: Number(event.target.value) })
         }
         style={{ width: '100%', marginRight: '10px' }}
       />
-      <TextInput
+      <Select
+        data={categories}
         label="Category"
-        placeholder="Enter category"
+        placeholder="Select category"
         value={expense.category}
-        onChange={(event) =>
-          setExpense({ ...expense, category: event.target.value })
-        }
-        style={{ width: '100%' }}
+        onChange={(value: string) => setExpense({ ...expense, category: value })}
+        style={{ width: '100%', marginRight: '10px' }}
       />
       <Button type="submit" style={{marginTop: '24px'}}>Add expense</Button>
     </form>

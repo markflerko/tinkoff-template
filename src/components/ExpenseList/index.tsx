@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Table, Text, Badge } from '@mantine/core';
+import { Select, Table, Text } from '@mantine/core';
+import { useState } from 'react';
 import { ExpensesType } from '../../types/ExpensesTypes';
 
 type ExpenseListProps = {
@@ -17,42 +17,30 @@ function ExpenseList({ expenses }: ExpenseListProps) {
   // Calculate total amount
   const total = filteredExpenses.reduce((acc, curr) => +acc + +curr.amount, 0);
 
+  // Define categories for dropdown options
+  const categories = [
+    { label: 'All', value: '' },
+    { label: 'Food', value: 'food' },
+    { label: 'Housing', value: 'housing' },
+    { label: 'Transportation', value: 'transportation' },
+  ];
+
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}
+      >
         <Text size="sm">Filter by category:</Text>
-        <Badge
-          size="md"
-          color={categoryFilter ? 'blue' : 'gray'}
-          variant={categoryFilter ? 'filled' : 'outline'}
-          onClick={() => setCategoryFilter('')}
-        >
-          All
-        </Badge>
-        <Badge
-          size="md"
-          color="blue"
-          variant={categoryFilter === 'food' ? 'filled' : 'outline'}
-          onClick={() => setCategoryFilter('food')}
-        >
-          Food
-        </Badge>
-        <Badge
-          size="md"
-          color="blue"
-          variant={categoryFilter === 'housing' ? 'filled' : 'outline'}
-          onClick={() => setCategoryFilter('housing')}
-        >
-          Housing
-        </Badge>
-        <Badge
-          size="md"
-          color="blue"
-          variant={categoryFilter === 'transportation' ? 'filled' : 'outline'}
-          onClick={() => setCategoryFilter('transportation')}
-        >
-          Transportation
-        </Badge>
+        <Select
+          placeholder="All"
+          value={categoryFilter}
+          onChange={(value) => setCategoryFilter(value || '')}
+          data={categories}
+        />
       </div>
       <Table striped>
         <thead>
