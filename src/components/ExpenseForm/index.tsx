@@ -25,7 +25,7 @@ function ExpenseForm({ setExpenses }: ExpenseFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} style={{ display: 'flex' }}>
       <TextInput
         label="Description"
         placeholder="Enter description"
@@ -33,6 +33,7 @@ function ExpenseForm({ setExpenses }: ExpenseFormProps) {
         onChange={(event) =>
           setExpense({ ...expense, description: event.target.value })
         }
+        style={{ width: '100%', marginRight: '10px' }}
       />
       <TextInput
         label="Amount"
@@ -41,6 +42,7 @@ function ExpenseForm({ setExpenses }: ExpenseFormProps) {
         onChange={(event) =>
           setExpense({ ...expense, amount: event.target.value })
         }
+        style={{ width: '100%', marginRight: '10px' }}
       />
       <TextInput
         label="Category"
@@ -49,8 +51,9 @@ function ExpenseForm({ setExpenses }: ExpenseFormProps) {
         onChange={(event) =>
           setExpense({ ...expense, category: event.target.value })
         }
+        style={{ width: '100%' }}
       />
-      <Button type="submit">Add expense</Button>
+      <Button type="submit" style={{marginTop: '24px'}}>Add expense</Button>
     </form>
   );
 }

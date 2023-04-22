@@ -17,6 +17,7 @@ function App() {
     <div className="App">
       <h1>Expense Tracker</h1>
       <ExpenseForm setExpenses={setExpenses} />
+      <br />
       <ExpenseList expenses={expenses} />
     </div>
   );
