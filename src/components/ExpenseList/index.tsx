@@ -42,14 +42,18 @@ function ExpenseList({ expenses }: ExpenseListProps) {
     acc[category] += amount;
     return acc;
   }, {} as Record<string, number>);
-
-  const data = Object.entries(expensesByCategory).map(([category, amount]) => {
+  
+  const categoriesKeys = Object.keys(expensesByCategory);
+  const colors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AF19FF', '#FA541C', '#FAAD14', '#A0D911', '#52C41A', '#13C2C2', '#1890FF', '#2F54EB', '#722ED1', '#EB2F96', '#FF4D4F', '#FF7A45', '#FFC53D', '#73D13D', '#36CFC9', '#40A9FF'];
+  
+  const data = categoriesKeys.map((category, index) => {
     return {
       name: category,
-      value: amount,
+      value: expensesByCategory[category],
+      fill: colors[index % colors.length],
     };
   });
-
+  
   return (
     <div>
       <div
